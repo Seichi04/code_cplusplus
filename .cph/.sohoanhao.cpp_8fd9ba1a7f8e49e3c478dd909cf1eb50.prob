@@ -1,0 +1,1 @@
+{"name":"Local: sohoanhao","url":"d:\\MyCode\\codeC++-semester1- year2\\sohoanhao.cpp","tests":[{"id":1692448315982,"input":"1\n10000000000000000","output":"0"},{"id":1692448388395,"input":"1\n1000000000000000000","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\MyCode\\codeC++-semester1- year2\\sohoanhao.cpp","group":"local","local":true}
