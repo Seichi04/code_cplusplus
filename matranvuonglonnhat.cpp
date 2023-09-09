@@ -104,9 +104,10 @@ void solve()
             }
         }
     }
-
+    bool flag= false;
     if(record==0)
     {
+        
         for(int i=0;i<n-1;i++)
         {
             for(int j=0;j<n-1;j++)
@@ -116,12 +117,17 @@ void solve()
                     std::cout<<"2\n";
                     return;
                 }
+                if(a[i*n+j]=='X') flag = true;
             }
         }
     }
     if(record==0) 
     {
-        std::cout<<"1\n";
+        if(flag)
+        {
+            std::cout<<"1\n";
+        }
+        else std::cout<<"0\n";
         return;
     }
 
