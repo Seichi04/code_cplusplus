@@ -13,7 +13,19 @@ int toInt(char a)
 std::string hieu(std::string x,std::string y)
 {
     std::string ans;
+    
+    while(x.front()=='0')
+    {
+        x.erase(x.begin());
+    }
+    if(x.empty()) x="0";
+    
+    if(x=="0"  ) return ans="0";
+    if((x.size() == y.size() && x<y )  || x.size() < y.size()) return ans=x;
+
+
     int i=x.size()-1,j=y.size()-1;
+
     int nho=0;
     while(i>=0)
     {
@@ -47,58 +59,64 @@ std::string hieu(std::string x,std::string y)
         }
     }
     std::reverse(ans.begin(),ans.end());
+    while(ans.front()=='0')
+    {
+        ans.erase(ans.begin());
+    }
+    if(ans.empty()) ans="0";
     return ans;
 }
 
-std::string tong(std::string a,std::string b)
+bool compareGreater(std::string a,std::string b)
 {
+    if(a.size()!=b.size())
+    {
+        return a.size() > b.size();
+    }
+    else
+    {
+        return a>b;
+    }
+}
+
+std::string chia(std::string x,std::string y)
+{
+    if(((x!=y) && !compareGreater(x,y))) return "0";
+    long long nx=x.size(),ny=y.size();
     std::string ans;
-    long long i= a.size()-1;
-    long long j= b.size()-1;
-    int nho=0;
-    while(i>=0 || j>=0)
-    {
-        int sum=0;
-        if(i>=0)
-        {
-            sum= sum+ (int)a[i]-48;
-            i--;
-        }
-        if(j>=0)
-        {
-            sum= sum+ (int)b[j]-48;
-            j--;
-        }
-        sum+=nho;
-        nho=sum/10;
-        sum%=10;
-        ans.push_back((char)(sum+48));
-    }
-    if(nho!=0) ans.push_back((char)(nho+48));
-    std::reverse(ans.begin(),ans.end());
-    return ans;
-}
 
-std::string nhan(std::string s,int a)
-{
+    int idx=0;
     std::string temp;
-    int nho=0;
-    for(int i=s.size()-1;i>=0;i--)
+
+    while(x.size() >= idx)
     {
-        int x= ((int)s[i]-48)*a +nho;
-        nho= x/10;
-        x%=10;
-        temp.push_back((char)(x+48));
+        int count=0;
+        
+        while(temp.front()=='0')
+        {
+            temp.erase(temp.begin());
+        }
+        if(temp.empty()) temp="0";
+
+        while(temp==y || compareGreater(temp,y))
+        {
+            count++;
+            temp = hieu(temp,y);
+        }
+        ans.push_back(count + '0');
+
+        if(idx == x.size()) break;
+        while( !(temp == y) && !compareGreater(temp,y) )
+        {
+            temp= temp + x[idx++];
+        }
     }
-    if(nho!=0) temp.push_back((char)(nho+48));
-    std::reverse(temp.begin(),temp.end());
-    return temp;
-}
-
-
-void chia(std::string x,std::string y)
-{
-    
+    while(ans.front()=='0')
+    {
+        ans.erase(ans.begin());
+    }
+    if(ans.empty()) ans="0";
+    return ans;
 }
 
 int main()
@@ -110,7 +128,7 @@ int main()
         std::string x,y;
         std::cin>>x>>y;
 
-
+        std::cout<<chia(x,y)<<"\n";
         
     }
 }

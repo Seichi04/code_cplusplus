@@ -21,38 +21,42 @@ int main()
         }
         std::cin>>k>>x;
        
-        long long l,r;
-        bool flag=false;
-        for(int i=0;i<n;i++)
+        int i=0,j=0;
+        bool flagI=1,flagJ=1;
+        for(int z=0;z<n;z++)
         {
-            if(a[i]==x && !flag)
+            // if(a[z+1] >= x && flagI)
+            // {
+            //     i=z;
+            //     flagI=0;
+            // }
+            // if(a[z] > x && flagJ)
+            // {
+            //     j=z;
+            //     flagJ=0;
+            // }
+            // if(!flagI && !flagJ) 
+            //     break;
+            if(a[z]>= x)
             {
-                l=i;
-                r=i;
-                flag=true;
-            }
-            if(a[i]==x && flag)
-            {
-                r=i;
+                i=z;
+                break;
             }
         }
-        l--,r++;
-        long long count=0;
-        while(count<k)
+        for(int z= i- k/2 ;z<i;z++)
         {
-            if(l>=0)
-            {
-                std::cout<<a[l--]<<" ";
-                count++;
-            }
-            if(count==k) break;
-            if(r<n)
-            {
-                std::cout<<a[r++]<<" ";
-                count++;
-            }
+            if(z<0)
+                std::cout<<0<<" ";
+            else  
+                std::cout<<a[z]<<" ";
+        }
+        for(int z= i+1;z<=i+k/2;z++)
+        {
+            if(z>=n)
+                std::cout<<0<<" ";
+            else
+                std::cout<<a[z]<<" ";
         }
         std::cout<<"\n";
-        
     }
 }
